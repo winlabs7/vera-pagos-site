@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vera Pagos</title>
+<meta name="description" content="Vera Pagos: recibe tus ingresos de Estados Unidos y cóbralos en pesos colombianos, con soporte legal. Para creadores, influencers, streamers, actores y estudios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Apple-style quiet bank. Centered statement hero over a phone showing the Vera Pagos app, then alternating white / mist bands on a 1080px column, one black band for security. */
+:root{
+  --bg:#FFFFFF; --mist:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --muted:#6E6E73; --faint:#86868B; --line:#D2D2D7;
+  --accent:#0071E3; --accent-ink:#0066CC; --ok:#1E8E3E; --ok-soft:#E6F4EA;
+  --night:#000000; --night-2:#161617; --on-night:#F5F5F7; --on-night-muted:#A1A1A6; --night-line:#333336;
+  --f-sans:-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-num:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --wrap:1080px; --r:22px;
+}
+/* Always light, like apple.com: no dark-mode overrides. */
+:root,:root[data-theme="dark"]{color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:17px;line-height:1.5;letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+body.en .es, body:not(.en) .en{display:none!important}
+a{color:var(--accent-ink);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.025em;line-height:1.07;text-wrap:balance}
+h2{font-size:clamp(34px,5vw,56px)}
+h3{font-size:21px;letter-spacing:-.015em;line-height:1.2}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:clamp(16px,4vw,28px)}
+section{padding-block:clamp(72px,10vw,120px)}
+.mist{background:var(--mist)}
+.kicker{font-size:15px;font-weight:600;color:var(--muted);letter-spacing:-.005em}
+.lede{font-size:clamp(19px,2vw,21px);color:var(--muted);line-height:1.45;max-width:640px}
+.head{display:grid;gap:14px;margin-bottom:clamp(40px,6vw,64px);max-width:760px}
+.head.center{text-align:center;justify-items:center;margin-inline:auto}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;letter-spacing:0}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:500 17px/1 var(--f-sans);padding:13px 24px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none!important;transition:background .2s ease}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-quiet{color:var(--accent-ink);background:transparent;border-color:var(--accent-ink)}
+.btn-quiet:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.more{font-size:17px;color:var(--accent-ink)}
+.more::after{content:" ›"}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.top .wrap{display:flex;align-items:center;gap:22px;height:52px}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:600;font-size:18px;letter-spacing:-.02em;text-decoration:none!important;white-space:nowrap}
+.brand .mark{width:24px;height:24px;border-radius:7px;background:var(--ink);display:grid;place-items:center;flex:none}
+.brand .mark path{stroke:var(--bg)}
+.nav{display:flex;gap:24px;margin-left:auto;font-size:13px}
+.nav a{color:var(--ink);opacity:.8}
+.nav a:hover{opacity:1;text-decoration:none}
+.lang{display:flex;gap:2px;background:var(--mist);border-radius:999px;padding:2px;flex:none}
+.lang button{all:unset;cursor:pointer;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.lang button:focus-visible{outline:2px solid var(--accent)}
+.top .btn{font-size:13px;padding:7px 14px}
+@media (max-width:860px){.nav{display:none}.lang{margin-left:auto}}
+@media (max-width:420px){.top .btn{display:none}}
+
+/* Hero */
+.hero{padding-block:clamp(56px,9vw,104px) 0;text-align:center;overflow:hidden}
+.hero .kicker{color:var(--accent-ink)}
+.hero h1{font-size:clamp(44px,7.4vw,84px);margin:14px auto 0;max-width:15ch}
+.hero .lede{margin:22px auto 0;max-width:620px}
+.hero .ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:32px}
+.stage{position:relative;margin-top:clamp(48px,7vw,80px);padding-bottom:clamp(56px,8vw,96px)}
+.stage::before{content:"";position:absolute;left:0;right:0;bottom:0;height:78%;background:linear-gradient(180deg,var(--bg),var(--mist));pointer-events:none}
+
+.example{font-size:12px;color:var(--faint)}
+
+/* Phone showcase */
+.stage::before{background:radial-gradient(60% 55% at 50% 42%,#E3EEFF 0%,rgba(227,238,255,0) 70%),linear-gradient(180deg,var(--bg),var(--mist))}
+.showcase{position:relative;display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(20px,4vw,56px);align-items:center}
+.side{display:grid;gap:clamp(60px,8vw,120px);min-width:0}
+.side-l{justify-items:end}.side-r{justify-items:start}
+.side-l .f2{margin-right:-30px}.side-r .f4{margin-left:-30px}
+.float,.notif{background:rgba(255,255,255,.82);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(0,0,0,.06);border-radius:20px;box-shadow:0 24px 48px -20px rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.04);text-align:left;color:var(--ink)}
+.float{padding:16px 18px;width:230px;display:grid;gap:4px}
+.fh{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--muted)}
+.dot{width:7px;height:7px;border-radius:50%}.dot-blue{background:#0071E3}.dot-green{background:#1E8E3E}
+.fbig{font-family:var(--f-sans);font-size:26px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.fsub{font-size:12px;color:var(--faint)}
+.spark{width:100%;height:36px;margin-top:6px}
+.f2{display:flex;align-items:center;gap:12px;width:auto;padding:14px 18px 14px 14px}
+.f2 b{display:block;font-size:14px;font-weight:600}.f2 small{display:block;font-size:12px;color:var(--faint)}
+.doc-ico{width:40px;height:40px;border-radius:11px;background:var(--mist);display:grid;place-items:center;flex:none}
+.bars{display:flex;align-items:flex-end;gap:5px;height:44px;margin:8px 0 4px}
+.bars i{flex:1;border-radius:4px;background:#D6E6FB}.bars i.hi{background:#0071E3}
+.notif{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;width:290px}
+.notif .app-ico{width:34px;height:34px;border-radius:9px;background:#1D1D1F;display:grid;place-items:center;flex:none}
+.notif .nt{display:flex;justify-content:space-between;gap:10px;font-size:13px}
+.notif .nt span{color:var(--faint);font-size:12px}
+.notif p{font-size:13px;line-height:1.35;margin-top:1px}
+.notif-m{display:none}
+
+.phone-wrap{position:relative;animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+.side-l{animation:rise 1s .12s cubic-bezier(.2,.7,.2,1) both}.side-r{animation:rise 1s .2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{transform:translateY(28px)}to{transform:none}}
+.phone{position:relative;width:min(318px,80vw);aspect-ratio:318/658;border-radius:54px;padding:11px;background:linear-gradient(145deg,#2C2C2E,#0E0E10 60%,#2C2C2E);box-shadow:inset 0 0 0 1.5px #48484A,inset 0 0 0 4px #1A1A1C,0 60px 90px -40px rgba(0,40,100,.45),0 30px 50px -30px rgba(0,0,0,.35)}
+.phone::before,.phone::after{content:"";position:absolute;width:3px;border-radius:2px;background:#2C2C2E}
+.phone::before{left:-3px;top:22%;height:9%;box-shadow:0 70px 0 #2C2C2E}
+.phone::after{right:-3px;top:28%;height:14%}
+.screen{position:relative;height:100%;border-radius:44px;overflow:hidden;background:#F5F5F7;display:flex;flex-direction:column;text-align:left;color:#1D1D1F;font-size:13px;letter-spacing:-.01em}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:92px;height:27px;border-radius:20px;background:#000;z-index:2}
+.status{display:flex;justify-content:space-between;align-items:center;padding:15px 26px 0 30px;height:44px;font-size:14px;font-weight:600}
+.status .sb{display:flex;gap:5px;align-items:center}
+.app{flex:1;padding:12px 14px 0;display:flex;flex-direction:column;gap:12px;min-height:0;overflow:hidden}
+.app-top{display:flex;justify-content:space-between;align-items:center;padding:0 4px}
+.app-top small{display:block;font-size:12px;color:#86868B}
+.app-top b{font-size:22px;font-weight:700;letter-spacing:-.025em}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FFD7A8,#F59E6B);color:#5A2A06;font-size:12px;font-weight:700;display:grid;place-items:center}
+.dep{position:relative;overflow:hidden;border-radius:22px;padding:16px 16px 14px;color:#F5F5F7;background:radial-gradient(120% 90% at 100% 0%,#2B3A55 0%,rgba(43,58,85,0) 60%),linear-gradient(160deg,#1D1D1F,#0B0B0C);box-shadow:0 12px 24px -12px rgba(0,0,0,.4)}
+.dep::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;border:1px solid rgba(255,255,255,.08);box-shadow:0 0 0 22px rgba(255,255,255,.025),0 0 0 44px rgba(255,255,255,.02)}
+.dep-h{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:#A1A1A6}
+.pill-ok{background:rgba(48,209,88,.16);color:#30D158;font-weight:600;font-size:10.5px;padding:3px 8px;border-radius:999px}
+.num-tab{font-variant-numeric:tabular-nums}
+.dep-amt{font-size:29px;font-weight:700;letter-spacing:-.03em;margin-top:8px;line-height:1.1}
+.dep-amt span{font-size:12px;font-weight:600;color:#A1A1A6;margin-left:5px;letter-spacing:0}
+.dep-sub{font-size:11.5px;color:#A1A1A6;margin-top:3px}
+.dep-track{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:14px}
+.dep-track i{height:4px;border-radius:3px;background:#30D158}
+.dep-lab{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:6px;font-size:10px;color:#A1A1A6}
+.incoming{display:flex;align-items:center;gap:10px;background:#fff;border-radius:16px;padding:11px 12px}
+.in-ico{width:30px;height:30px;border-radius:50%;background:#E8F1FD;display:grid;place-items:center;flex:none}
+.incoming div{flex:1;min-width:0}
+.incoming b{display:block;font-size:13px;font-weight:600}.incoming small{display:block;font-size:11px;color:#86868B}
+.in-amt{font-size:13px;font-weight:600;color:#0071E3}
+.list-h{font-size:12px;font-weight:600;color:#86868B;padding:0 4px;margin-bottom:-4px}
+.moves{list-style:none;margin:0;padding:4px 12px;background:#fff;border-radius:16px}
+.moves li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #EDEDF0}
+.moves li:last-child{border-bottom:0}
+.mv-ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:10px;flex:none}
+.moves li div{flex:1;min-width:0}
+.moves b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.moves small{display:block;font-size:10.5px;color:#86868B}
+.moves li > span:last-child{font-size:12.5px;font-weight:600}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px 0;background:rgba(255,255,255,.9);border-top:1px solid #E5E5EA;margin-top:8px}
+.tabs > span{display:grid;justify-items:center;gap:2px;font-size:9.5px;font-weight:500;color:#AEAEB2}
+.tabs > span.on{color:#0071E3}
+.home-bar{height:22px;background:rgba(255,255,255,.9);display:grid;place-items:center}
+.home-bar::before{content:"";width:110px;height:4.5px;border-radius:3px;background:#1D1D1F}
+
+@media (max-width:980px){
+  .showcase{grid-template-columns:1fr;justify-items:center}
+  .side{display:none}
+  .notif-m{display:flex;position:absolute;z-index:3;left:50%;top:62px;transform:translateX(-50%);width:calc(100% - 4px);max-width:330px}
+}
+@media (max-width:360px){.dep-amt{font-size:24px}.moves b{font-size:11.5px}}
+
+/* Who strip */
+.who{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.who div{padding:22px 18px;border-left:1px solid var(--line);min-width:0;text-align:center}
+.who div:first-child{border-left:0}
+.who b{display:block;font-size:16px;font-weight:600}
+.who small{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
+@media (max-width:820px){.who{grid-template-columns:1fr 1fr}.who div{border-left:0;border-top:1px solid var(--line);text-align:left;padding-inline:0}.who div:nth-child(-n+2){border-top:0}.who div:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.step{background:var(--card);border-radius:var(--r);padding:28px 24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.step .n{font-size:13px;font-weight:600;color:var(--accent-ink)}
+.step p{color:var(--muted);font-size:15.5px}
+.step .t{margin-top:auto;padding-top:10px;font-size:13px;color:var(--faint)}
+@media (max-width:920px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:540px){.steps{grid-template-columns:1fr}}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.tile{background:var(--mist);border-radius:var(--r);padding:clamp(26px,3.4vw,40px);display:flex;flex-direction:column;gap:12px;min-width:0}
+.tile p{color:var(--muted);font-size:16px}
+.tile h3{font-size:clamp(22px,2.4vw,28px)}
+.t-wide{grid-column:span 4}.t-narrow{grid-column:span 2}.t-half{grid-column:span 3}
+.big{font-size:clamp(46px,6vw,72px);font-weight:600;letter-spacing:-.04em;line-height:1;color:var(--ink)}
+.big small{font-size:.38em;letter-spacing:-.01em;color:var(--muted);font-weight:500;margin-left:6px}
+.doc{margin-top:auto;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:16px 18px;display:grid;gap:6px;font-size:13.5px}
+.doc .dh{display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.doc .dl{display:flex;justify-content:space-between;gap:10px;color:var(--muted)}
+.doc .dl span:last-child{font-variant-numeric:tabular-nums;color:var(--ink)}
+.banks{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.banks span{font-size:13.5px;padding:7px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+@media (max-width:900px){.t-wide,.t-narrow,.t-half{grid-column:span 6}}
+
+/* Audience */
+.aud{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.aud article{background:var(--card);border-radius:var(--r);padding:28px 26px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.aud article p{color:var(--muted);font-size:15.5px}
+.aud ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:15px}
+.aud li{display:grid;grid-template-columns:16px 1fr;gap:8px}
+.aud li svg{margin-top:5px;color:var(--accent-ink)}
+.aud .studio{grid-column:span 3;display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;align-items:start}
+.aud .studio > div{display:grid;gap:10px;min-width:0}
+@media (max-width:900px){.aud{grid-template-columns:1fr 1fr}.aud .studio{grid-column:span 2}}
+@media (max-width:600px){.aud{grid-template-columns:1fr}.aud .studio{grid-column:span 1;grid-template-columns:1fr}}
+
+/* Green Room bridge */
+.bridge{display:grid;gap:clamp(36px,5vw,56px)}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:10px}
+.node{border:1px solid var(--line);border-radius:18px;padding:18px 18px;background:var(--card);display:grid;gap:4px;align-content:start;min-width:0}
+.node small{font-size:12px;font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.node b{font-size:16px;font-weight:600}
+.node span{font-size:13.5px;color:var(--muted)}
+.node.opt{border-style:dashed}
+.node.vera{background:var(--ink);border-color:var(--ink)}
+.node.vera b{color:var(--bg)}
+.node.vera small,.node.vera span{color:color-mix(in srgb,var(--bg) 70%,var(--ink))}
+.arrow{display:grid;place-items:center;color:var(--faint)}
+@media (max-width:900px){.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);height:22px}}
+.grg{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,5vw,64px);align-items:center;background:var(--mist);border-radius:28px;padding:clamp(28px,4.5vw,52px)}
+.grg > *{min-width:0}
+.grg ul{margin:0;padding:0;list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
+.grg li{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15.5px}
+.grg li span:last-child{color:var(--muted);text-align:right}
+.grg .ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:26px}
+@media (max-width:860px){.grg{grid-template-columns:1fr}}
+
+/* Security (night band) */
+.night{background:var(--night);color:var(--on-night)}
+.night .lede{color:var(--on-night-muted)}
+.night .kicker{color:var(--on-night-muted)}
+.sec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--night-line);border:1px solid var(--night-line);border-radius:var(--r);overflow:hidden}
+.sec-grid div{background:var(--night-2);padding:28px 26px;display:grid;gap:8px;align-content:start;min-width:0}
+.sec-grid p{color:var(--on-night-muted);font-size:15.5px}
+.sec-grid svg{color:var(--on-night);margin-bottom:6px}
+@media (max-width:860px){.sec-grid{grid-template-columns:1fr}}
+.disclaim{margin-top:28px;font-size:13.5px;color:var(--on-night-muted);max-width:820px}
+
+/* Pricing */
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.price-card{background:var(--card);border-radius:var(--r);padding:clamp(28px,3.6vw,40px);display:flex;flex-direction:column;gap:14px;min-width:0}
+.price-card p{color:var(--muted)}
+.price-card ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--line);flex:1}
+.price-card li{display:grid;grid-template-columns:18px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15.5px}
+.price-card li svg{margin-top:4px;color:var(--ok)}
+.price-card .btn{align-self:flex-start;margin-top:10px}
+@media (max-width:760px){.price-grid{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{max-width:820px;margin:0 auto;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-size:19px;font-weight:600;letter-spacing:-.015em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:10px;height:10px;border-right:1.6px solid var(--muted);border-bottom:1.6px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s ease}
+.faq details[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.faq details > p{padding:0 0 22px;color:var(--muted);font-size:16.5px;max-width:68ch}
+.faq details > p + p{margin-top:-10px}
+
+/* Apply */
+.apply{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,64px);align-items:start}
+.apply > *{min-width:0}
+.contact-list{margin-top:28px;display:grid;gap:12px}
+.contact-line{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--mist);border-radius:14px;padding:12px 14px}
+.contact-line small{font-size:12px;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:.06em;width:100%}
+.contact-line .addr{font-size:16px;font-weight:500;user-select:all;word-break:break-all;flex:1;min-width:0}
+.copy{all:unset;cursor:pointer;font-size:13px;font-weight:500;color:var(--accent-ink);padding:4px 8px;border-radius:8px}
+.copy:focus-visible{outline:2px solid var(--accent)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--mist);border-radius:28px;padding:clamp(22px,3.4vw,36px)}
+form .full{grid-column:1/-1}
+label{display:grid;gap:6px;font-size:13.5px;font-weight:500;color:var(--muted);min-width:0}
+input,select,textarea{font:400 16px/1.4 var(--f-sans);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 13px;width:100%;min-width:0}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+form .btn{justify-self:start}
+.formnote{font-size:13px;color:var(--faint)}
+.done{grid-column:1/-1;background:var(--card);border-radius:16px;padding:20px;display:grid;gap:10px}
+.done[hidden]{display:none}
+.contact-line{background:var(--card)}
+.done pre{margin:0;white-space:pre-wrap;word-break:break-word;font:13.5px/1.5 var(--f-num);background:var(--mist);border-radius:10px;padding:14px;max-height:240px;overflow:auto}
+.done .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+@media (max-width:860px){.apply{grid-template-columns:1fr}}
+@media (max-width:520px){form{grid-template-columns:1fr}}
+
+/* Footer */
+.footer{background:var(--mist);border-top:1px solid var(--line);padding-block:36px 44px;font-size:12.5px;color:var(--muted)}
+.footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.footer nav{display:flex;flex-wrap:wrap;gap:18px}
+.footer nav a{color:var(--muted)}
+.footer .legal{margin-top:18px;display:grid;gap:8px;max-width:92ch;line-height:1.55}
+</style>
+<style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Vera Pagos">
+      <span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.2 3.4l4.8 8 4.8-8" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      Vera Pagos
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#como"><span class="es">Cómo funciona</span><span class="en">How it works</span></a>
+      <a href="#ventajas"><span class="es">Ventajas</span><span class="en">Why Vera</span></a>
+      <a href="#para-quien"><span class="es">Para quién</span><span class="en">Who it's for</span></a>
+      <a href="#llc"><span class="es">Empresa en EE.UU.</span><span class="en">U.S. company</span></a>
+      <a href="#seguridad"><span class="es">Seguridad</span><span class="en">Security</span></a>
+      <a href="#preguntas"><span class="es">Preguntas</span><span class="en">FAQ</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" id="lang-es" aria-pressed="true">ES</button>
+      <button type="button" id="lang-en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-primary" href="#abrir"><span class="es">Abrir cuenta</span><span class="en">Open account</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker"><span class="es">Pagos internacionales para la industria del entretenimiento</span><span class="en">International payments for the entertainment industry</span></p>
+    <h1>
+      <span class="es">Ganas en dólares. Cobras en Colombia.</span>
+      <span class="en">Earn in dollars. Get paid in Colombia.</span>
+    </h1>
+    <p class="lede">
+      <span class="es">Vera Pagos recibe tus ingresos de plataformas, marcas y productoras en Estados Unidos y los deposita en pesos en tu cuenta en Colombia. Con tasa clara, pagos puntuales y un certificado de ingresos que tu banco y la DIAN entienden.</span>
+      <span class="en">Vera Pagos receives your income from U.S. platforms, brands and productions and deposits it in pesos to your bank account in Colombia. With a clear rate, on-time payouts and an income certificate your bank and the DIAN understand.</span>
+    </p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#abrir"><span class="es">Abrir cuenta</span><span class="en">Open an account</span></a>
+      <a class="btn btn-quiet" href="#como"><span class="es">Ver cómo funciona</span><span class="en">See how it works</span></a>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="wrap showcase">
+
+      <!-- left floating cards -->
+      <div class="side side-l" aria-hidden="true">
+        <div class="float f1">
+          <div class="fh"><span class="dot dot-blue"></span><span class="es">Tasa de hoy</span><span class="en">Today's rate</span></div>
+          <div class="fbig num">3.905,40</div>
+          <div class="fsub">USD → COP · <span class="es">antes de confirmar</span><span class="en">before you confirm</span></div>
+          <svg class="spark" viewBox="0 0 160 40" preserveAspectRatio="none"><path d="M0 30 L18 26 L34 28 L52 20 L70 22 L88 15 L106 18 L124 10 L142 13 L160 6" fill="none" stroke="#0071E3" stroke-width="2" stroke-linejoin="round"/><path d="M0 30 L18 26 L34 28 L52 20 L70 22 L88 15 L106 18 L124 10 L142 13 L160 6 L160 40 L0 40Z" fill="#0071E3" opacity=".08"/></svg>
+        </div>
+        <div class="float f2">
+          <div class="doc-ico"><svg width="18" height="22" viewBox="0 0 18 22"><path d="M2 1h10l5 5v15H2z" fill="#fff" stroke="#1D1D1F" stroke-width="1.4"/><path d="M12 1v5h5" fill="none" stroke="#1D1D1F" stroke-width="1.4"/><path d="M5 11h8M5 14h8M5 17h5" stroke="#86868B" stroke-width="1.2"/></svg></div>
+          <div><b><span class="es">Certificado de ingresos</span><span class="en">Income certificate</span></b><small>2026 · PDF · <span class="es">Listo</span><span class="en">Ready</span></small></div>
+        </div>
+      </div>
+
+      <!-- phone -->
+      <div class="phone-wrap">
+        <div class="notif notif-m" aria-hidden="true">
+          <span class="app-ico"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M2.2 3.4l4.8 8 4.8-8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><div class="nt"><b>Vera Pagos</b><span><span class="es">ahora</span><span class="en">now</span></span></div><p><span class="es">Depositamos $12.247.334 en tu cuenta ••4821.</span><span class="en">We deposited $12,247,334 COP to your account ••4821.</span></p></div>
+        </div>
+        <div class="phone" role="img" aria-label="App de Vera Pagos mostrando un depósito de 12.247.334 pesos">
+          <div class="screen">
+            <div class="island"></div>
+            <div class="status"><span>9:41</span><span class="sb"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="#1D1D1F"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="#1D1D1F"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="#1D1D1F"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="#1D1D1F"/></svg><svg width="24" height="11" viewBox="0 0 24 11"><rect x=".5" y=".5" width="20" height="10" rx="3" fill="none" stroke="#1D1D1F" opacity=".4"/><rect x="2" y="2" width="15" height="7" rx="1.8" fill="#1D1D1F"/><rect x="21.5" y="3.5" width="1.6" height="4" rx=".8" fill="#1D1D1F" opacity=".4"/></svg></span></div>
+
+            <div class="app">
+              <div class="app-top">
+                <div><small><span class="es">Hola,</span><span class="en">Hi,</span></small><b>Sofía</b></div>
+                <span class="avatar">SR</span>
+              </div>
+
+              <div class="dep">
+                <div class="dep-h"><span><span class="es">Último depósito</span><span class="en">Latest deposit</span></span><span class="pill-ok"><span class="es">Depositado</span><span class="en">Deposited</span></span></div>
+                <div class="dep-amt num-tab">$12.247.334<span>COP</span></div>
+                <div class="dep-sub"><span class="es">De US$ 3,200.00 · Ahorros ••4821</span><span class="en">From US$ 3,200.00 · Savings ••4821</span></div>
+                <div class="dep-track"><i></i><i></i><i></i></div>
+                <div class="dep-lab"><span><span class="es">Recibido</span><span class="en">Received</span></span><span><span class="es">Monetizado</span><span class="en">Converted</span></span><span><span class="es">En tu cuenta</span><span class="en">In your account</span></span></div>
+              </div>
+
+              <div class="incoming">
+                <span class="in-ico"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2v9M3 7l4 4 4-4" fill="none" stroke="#0071E3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <div><b><span class="es">En camino</span><span class="en">On the way</span></b><small><span class="es">Campaña de marca</span><span class="en">Brand campaign</span></small></div>
+                <span class="num-tab in-amt">US$ 1,850</span>
+              </div>
+
+              <div class="list-h"><span class="es">Movimientos</span><span class="en">Activity</span></div>
+              <ul class="moves">
+                <li><span class="mv-ico" style="background:#FFE8EC;color:#E0245E">▶</span><div><b><span class="es">Plataforma de suscripción</span><span class="en">Subscription platform</span></b><small>28 sep</small></div><span class="num-tab">+$4.102.110</span></li>
+                <li><span class="mv-ico" style="background:#EDE7FF;color:#6E3AFF">●</span><div><b>Live shopping</b><small>21 sep</small></div><span class="num-tab">+$1.780.400</span></li>
+                <li><span class="mv-ico" style="background:#E6F4EA;color:#1E8E3E">■</span><div><b><span class="es">Productora · Doblaje</span><span class="en">Studio · Voice work</span></b><small>16 sep</small></div><span class="num-tab">+$2.950.000</span></li>
+              </ul>
+            </div>
+
+            <nav class="tabs">
+              <span class="on"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 9l7-6 7 6v8H3z" fill="currentColor"/></svg><span class="es">Inicio</span><span class="en">Home</span></span>
+              <span><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 6h14M3 10h14M3 14h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="es">Pagos</span><span class="en">Payouts</span></span>
+              <span><svg width="20" height="20" viewBox="0 0 20 20"><path d="M5 2h7l4 4v12H5z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="es">Certificados</span><span class="en">Documents</span></span>
+              <span><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 18c1-3.5 3.6-5 6.5-5s5.5 1.5 6.5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="es">Perfil</span><span class="en">Profile</span></span>
+            </nav>
+            <div class="home-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right floating cards -->
+      <div class="side side-r" aria-hidden="true">
+        <div class="notif f3">
+          <span class="app-ico"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M2.2 3.4l4.8 8 4.8-8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><div class="nt"><b>Vera Pagos</b><span><span class="es">ahora</span><span class="en">now</span></span></div><p><span class="es">Depositamos $12.247.334 en tu cuenta ••4821.</span><span class="en">We deposited $12,247,334 COP to your account ••4821.</span></p></div>
+        </div>
+        <div class="float f4">
+          <div class="fh"><span class="dot dot-green"></span><span class="es">Últimos 30 días</span><span class="en">Last 30 days</span></div>
+          <div class="fbig num">$21.079.844</div>
+          <div class="bars"><i style="height:38%"></i><i style="height:52%"></i><i style="height:45%"></i><i style="height:66%"></i><i style="height:58%"></i><i style="height:80%"></i><i class="hi" style="height:100%"></i></div>
+          <div class="fsub"><span class="es">Recibido en pesos</span><span class="en">Received in pesos</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="example" style="text-align:center;margin-top:28px;position:relative"><span class="es">Imagen ilustrativa. Cifras de ejemplo.</span><span class="en">Illustrative image. Example figures.</span></p>
+  </div>
+</section>
+
+<!-- WHO -->
+<div class="wrap">
+  <div class="who">
+    <div><b><span class="es">Creadores</span><span class="en">Creators</span></b><small><span class="es">Suscripciones y contenido</span><span class="en">Subscriptions &amp; content</span></small></div>
+    <div><b>Influencers</b><small><span class="es">Marcas y UGC</span><span class="en">Brands &amp; UGC</span></small></div>
+    <div><b>Streamers</b><small><span class="es">En vivo y live shopping</span><span class="en">Live &amp; live shopping</span></small></div>
+    <div><b><span class="es">Actores y artistas</span><span class="en">Actors &amp; artists</span></b><small><span class="es">Producciones y doblaje</span><span class="en">Productions &amp; voice work</span></small></div>
+    <div><b><span class="es">Estudios y agencias</span><span class="en">Studios &amp; agencies</span></b><small><span class="es">Pagos a todo tu equipo</span><span class="en">Payouts for your roster</span></small></div>
+  </div>
+</div>
+
+<!-- HOW -->
+<section id="como">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Cómo funciona</span><span class="en">How it works</span></p>
+      <h2><span class="es">De tu plataforma a tu banco, en cuatro pasos.</span><span class="en">From your platform to your bank, in four steps.</span></h2>
+      <p class="lede"><span class="es">Una pagadora es la empresa que recibe tu dinero del exterior, lo convierte a pesos por los canales legales y te paga en Colombia. Nosotros hacemos ese trabajo por ti, con cada paso documentado.</span><span class="en">A pagadora is a company that receives your money from abroad, converts it to pesos through legal channels and pays you in Colombia. We do that work for you, with every step documented.</span></p>
+    </div>
+    <div class="steps" style="background:var(--mist);padding:16px;border-radius:30px">
+      <div class="step"><span class="n"><span class="es">Paso 1</span><span class="en">Step 1</span></span><h3><span class="es">Abre tu cuenta</span><span class="en">Open your account</span></h3><p><span class="es">Verificamos tu identidad con tu cédula, tu RUT y tu cuenta bancaria. Todo en línea, con atención en español.</span><span class="en">We verify your identity with your ID, your RUT and your bank account. All online, with support in Spanish and English.</span></p><span class="t"><span class="es">1 a 2 días hábiles</span><span class="en">1–2 business days</span></span></div>
+      <div class="step"><span class="n"><span class="es">Paso 2</span><span class="en">Step 2</span></span><h3><span class="es">Recibe en dólares</span><span class="en">Get paid in dollars</span></h3><p><span class="es">Te damos los datos para que tu plataforma, marca, productora o tu LLC te pague a Vera Pagos por transferencia en EE.UU.</span><span class="en">We give you the details so your platform, brand, production or your own LLC pays Vera Pagos by U.S. bank transfer.</span></p><span class="t">ACH · Wire</span></div>
+      <div class="step"><span class="n"><span class="es">Paso 3</span><span class="en">Step 3</span></span><h3><span class="es">Monetizamos</span><span class="en">We convert</span></h3><p><span class="es">Convertimos tus dólares a pesos a través del sistema financiero colombiano. Ves la tasa y la comisión antes de confirmar.</span><span class="en">We convert your dollars to pesos through the Colombian financial system. You see the rate and fee before you confirm.</span></p><span class="t"><span class="es">Tasa visible antes de pagar</span><span class="en">Rate shown before you pay</span></span></div>
+      <div class="step"><span class="n"><span class="es">Paso 4</span><span class="en">Step 4</span></span><h3><span class="es">Cobras en pesos</span><span class="en">Receive pesos</span></h3><p><span class="es">Depositamos en tu cuenta en Colombia y te enviamos la liquidación y tu certificado de ingresos.</span><span class="en">We deposit to your Colombian account and send you the settlement and your income certificate.</span></p><span class="t"><span class="es">Cualquier banco del país</span><span class="en">Any bank in Colombia</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="ventajas" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Ventajas</span><span class="en">Why Vera</span></p>
+      <h2><span class="es">Tu dinero, con respaldo.</span><span class="en">Your money, on the record.</span></h2>
+    </div>
+    <div class="bento">
+      <div class="tile t-wide">
+        <h3><span class="es">Ingresos que puedes demostrar.</span><span class="en">Income you can prove.</span></h3>
+        <p><span class="es">Cada pago queda soportado. Recibes un certificado de ingresos y un historial mensual que sirven para tu declaración de renta, para abrir productos en tu banco o para solicitar un crédito o un arriendo.</span><span class="en">Every payment is documented. You get an income certificate and a monthly history you can use for your tax return, for opening bank products, or for a loan or a lease application.</span></p>
+        <div class="doc" aria-label="Ejemplo de certificado">
+          <div class="dh"><span><span class="es">Certificado de ingresos · 2026</span><span class="en">Income certificate · 2026</span></span><span class="example">PDF</span></div>
+          <div class="dl"><span><span class="es">Beneficiario</span><span class="en">Payee</span></span><span>C.C. ••• 4471</span></div>
+          <div class="dl"><span><span class="es">Pagos recibidos</span><span class="en">Payouts received</span></span><span>18</span></div>
+          <div class="dl"><span><span class="es">Total pagado (COP)</span><span class="en">Total paid (COP)</span></span><span>$148.906.220</span></div>
+        </div>
+      </div>
+      <div class="tile t-narrow">
+        <h3><span class="es">Tasa sin sorpresas.</span><span class="en">No-surprise rate.</span></h3>
+        <p><span class="es">Ves la tasa de cambio, la comisión y el valor final en pesos antes de cada pago. Sin costos escondidos.</span><span class="en">You see the exchange rate, the fee and the final peso amount before every payout. No hidden costs.</span></p>
+        <div class="big" style="margin-top:auto">$0<small><span class="es">cargos ocultos</span><span class="en">hidden charges</span></small></div>
+      </div>
+      <div class="tile t-half">
+        <h3><span class="es">A tu cuenta de siempre.</span><span class="en">To the account you already use.</span></h3>
+        <p><span class="es">Depositamos en cuentas de ahorros o corriente de cualquier banco en Colombia. Sin tarjetas prepagadas del exterior ni billeteras que te pueden congelar.</span><span class="en">We deposit to savings or checking accounts at any bank in Colombia. No offshore prepaid cards or wallets that can freeze your money.</span></p>
+        <div class="banks"><span>Bancolombia</span><span>Davivienda</span><span>BBVA</span><span>Banco de Bogotá</span><span>Nequi</span><span class="es">y más</span><span class="en">and more</span></div>
+      </div>
+      <div class="tile t-half">
+        <h3><span class="es">Discreción profesional.</span><span class="en">Professional discretion.</span></h3>
+        <p><span class="es">Tu información y la de tus clientes se maneja con confidencialidad. En tu extracto aparece Vera Pagos como pagador, como cualquier empresa que te paga por tus servicios.</span><span class="en">Your information and your clients' information are kept confidential. Your bank statement shows Vera Pagos as the payer, like any company that pays you for your services.</span></p>
+        <p style="margin-top:auto;font-size:14px;color:var(--faint)"><span class="es">Datos protegidos bajo la Ley 1581 de 2012.</span><span class="en">Data protected under Colombian Law 1581 of 2012.</span></p>
+      </div>
+      <div class="tile t-narrow">
+        <h3><span class="es">Personas reales.</span><span class="en">Real people.</span></h3>
+        <p><span class="es">Equipo en Medellín que conoce la industria. Te atendemos en español e inglés.</span><span class="en">A Medellín team that knows the industry. Support in Spanish and English.</span></p>
+        <div class="big" style="margin-top:auto">ES<small>/ EN</small></div>
+      </div>
+      <div class="tile t-wide">
+        <h3><span class="es">Pagos puntuales, en tu calendario.</span><span class="en">On-time payouts, on your schedule.</span></h3>
+        <p><span class="es">Elige recibir cuando llega cada pago o en fechas fijas, como la quincena. Te avisamos en cada etapa: cuando recibimos el dinero, cuando se convierte y cuando llega a tu cuenta.</span><span class="en">Choose to be paid as each payment arrives or on fixed dates, like the 1st and the 16th. We notify you at each stage: when we receive the money, when it is converted, and when it reaches your account.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section id="para-quien" class="mist">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Para quién</span><span class="en">Who it's for</span></p>
+      <h2><span class="es">Hecho para quienes viven de su talento.</span><span class="en">Built for people who live off their talent.</span></h2>
+      <p class="lede"><span class="es">Si te pagan desde Estados Unidos por crear, actuar, transmitir o representar talento, Vera Pagos es tu puente a Colombia.</span><span class="en">If you are paid from the United States to create, perform, stream or represent talent, Vera Pagos is your bridge to Colombia.</span></p>
+    </div>
+    <div class="aud">
+      <article>
+        <h3><span class="es">Creadores e influencers</span><span class="en">Creators &amp; influencers</span></h3>
+        <p><span class="es">Ingresos de plataformas de suscripción, campañas con marcas, UGC y programas de afiliados.</span><span class="en">Income from subscription platforms, brand campaigns, UGC and affiliate programs.</span></p>
+      </article>
+      <article>
+        <h3>Streamers</h3>
+        <p><span class="es">Regalos, suscripciones y comisiones de transmisiones en vivo y live shopping para la audiencia en EE.UU.</span><span class="en">Gifts, subscriptions and commissions from live streams and live shopping for U.S. audiences.</span></p>
+      </article>
+      <article>
+        <h3><span class="es">Actores, músicos y voces</span><span class="en">Actors, musicians &amp; voice talent</span></h3>
+        <p><span class="es">Pagos de productoras, castings, doblaje, regalías y presentaciones contratadas desde EE.UU.</span><span class="en">Payments from productions, castings, dubbing, royalties and bookings contracted from the U.S.</span></p>
+      </article>
+      <article class="studio">
+        <div>
+          <h3><span class="es">Estudios y agencias</span><span class="en">Studios &amp; agencies</span></h3>
+          <p><span class="es">Recibe los pagos de tus plataformas a nombre del estudio y dispersa a cada creador, chatter y miembro del equipo en un solo proceso, con su soporte individual.</span><span class="en">Receive platform payments in your studio's name and pay out each creator, chatter and team member in one run, each with their own paper trail.</span></p>
+          <a class="more" href="#abrir"><span class="es">Hablar con el equipo de estudios</span><span class="en">Talk to our studio team</span></a>
+        </div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Dispersión masiva a cuentas en Colombia</span><span class="en">Bulk payouts to Colombian accounts</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Liquidación por persona, lista para nómina o cuenta de cobro</span><span class="en">Per-person statements, ready for payroll or invoices</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Reportes mensuales para tu contador</span><span class="en">Monthly reports for your accountant</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Tarifas por volumen</span><span class="en">Volume pricing</span></span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- GREEN ROOM BRIDGE -->
+<section id="llc">
+  <div class="wrap bridge">
+    <div class="head" style="margin-bottom:0">
+      <p class="kicker"><span class="es">Empresa en EE.UU.</span><span class="en">U.S. company</span></p>
+      <h2><span class="es">¿Aún no tienes empresa en Estados Unidos?</span><span class="en">Don't have a U.S. company yet?</span></h2>
+      <p class="lede"><span class="es">Muchas plataformas y marcas pagan más fácil, y con menos retenciones, a una LLC con EIN. No es obligatorio para usar Vera Pagos, pero para muchos talentos es el camino más ordenado.</span><span class="en">Many platforms and brands pay more easily, and with fewer withholdings, to an LLC with an EIN. You don't need one to use Vera Pagos, but for many talents it is the cleanest route.</span></p>
+    </div>
+
+    <div class="flow" aria-label="Flujo del dinero">
+      <div class="node"><small><span class="es">Origen</span><span class="en">Source</span></small><b><span class="es">Plataforma, marca o productora</span><span class="en">Platform, brand or production</span></b><span><span class="es">En Estados Unidos</span><span class="en">In the United States</span></span></div>
+      <div class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M3 9h12M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="node opt"><small><span class="es">Opcional</span><span class="en">Optional</span></small><b><span class="es">Tu LLC en EE.UU.</span><span class="en">Your U.S. LLC</span></b><span><span class="es">Creada con Green Room Global</span><span class="en">Formed with Green Room Global</span></span></div>
+      <div class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M3 9h12M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="node vera"><small>Vera Pagos</small><b><span class="es">Recibe y monetiza</span><span class="en">Receives &amp; converts</span></b><span><span class="es">Dólares a pesos, documentado</span><span class="en">Dollars to pesos, documented</span></span></div>
+      <div class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M3 9h12M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="node"><small><span class="es">Destino</span><span class="en">Destination</span></small><b><span class="es">Tu cuenta en Colombia</span><span class="en">Your account in Colombia</span></b><span><span class="es">En pesos, con certificado</span><span class="en">In pesos, with a certificate</span></span></div>
+    </div>
+
+    <div class="grg">
+      <div>
+        <p class="kicker">Green Room Global</p>
+        <h3 style="font-size:clamp(26px,3vw,34px);margin-top:8px"><span class="es">Tu empresa en EE.UU., lista desde Colombia.</span><span class="en">Your U.S. company, set up from Colombia.</span></h3>
+        <p class="lede" style="font-size:17px;margin-top:12px"><span class="es">Green Room Global es nuestra empresa aliada para talento internacional. Crean tu LLC, tramitan tu EIN sin número de Seguro Social y preparan tus impuestos en EE.UU. Cuando tu empresa esté lista, Vera Pagos se encarga de traer el dinero a Colombia.</span><span class="en">Green Room Global is our sister company for international talent. They form your LLC, get your EIN without a Social Security number, and prepare your U.S. taxes. Once your company is ready, Vera Pagos brings the money home to Colombia.</span></p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="https://greenroomglobal.co" target="_blank" rel="noopener"><span class="es">Ir a Green Room Global</span><span class="en">Visit Green Room Global</span></a>
+          <span class="example">greenroomglobal.co</span>
+        </div>
+      </div>
+      <ul>
+        <li><span><span class="es">Constitución de LLC</span><span class="en">LLC formation</span></span><span>Wyoming</span></li>
+        <li><span>EIN</span><span><span class="es">Sin SSN</span><span class="en">No SSN</span></span></li>
+        <li><span><span class="es">Agente registrado y dirección</span><span class="en">Registered agent &amp; address</span></span><span><span class="es">Incluido en planes</span><span class="en">In packages</span></span></li>
+        <li><span><span class="es">Impuestos en EE.UU.</span><span class="en">U.S. taxes</span></span><span class="num">5472 · 1040-NR</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section id="seguridad" class="night">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker"><span class="es">Seguridad y cumplimiento</span><span class="en">Security &amp; compliance</span></p>
+      <h2><span class="es">Seriedad de banco. Trato de equipo.</span><span class="en">Bank-grade care. Team-level service.</span></h2>
+      <p class="lede"><span class="es">Movemos dinero de personas reales que trabajan duro por él. Por eso cada cuenta y cada pago pasan por los mismos controles.</span><span class="en">We move money for real people who work hard for it. That is why every account and every payment goes through the same controls.</span></p>
+    </div>
+    <div class="sec-grid">
+      <div>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="12" r="2.4"/><path d="M14 10.5h4M14 13.5h3"/></svg>
+        <h3><span class="es">Conoce a tu cliente</span><span class="en">Know your customer</span></h3>
+        <p><span class="es">Verificación de identidad y del origen de los fondos en cada cuenta, bajo políticas de prevención de lavado de activos (SARLAFT).</span><span class="en">Identity and source-of-funds verification on every account, under Colombian anti-money-laundering policies (SARLAFT).</span></p>
+      </div>
+      <div>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h5"/></svg>
+        <h3><span class="es">Todo documentado</span><span class="en">Everything documented</span></h3>
+        <p><span class="es">Contrato de servicio, liquidación por pago y certificado anual. Tus ingresos quedan claros para ti, tu contador y la DIAN.</span><span class="en">Service agreement, a statement for every payout and an annual certificate. Your income is clear to you, your accountant and the DIAN.</span></p>
+      </div>
+      <div>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <h3><span class="es">Datos protegidos</span><span class="en">Protected data</span></h3>
+        <p><span class="es">Tus datos personales y bancarios se guardan cifrados y solo los usa el equipo que procesa tus pagos.</span><span class="en">Your personal and banking data are stored encrypted and used only by the team that processes your payouts.</span></p>
+      </div>
+    </div>
+    <p class="disclaim"><span class="es">Vera Pagos no es un banco ni un establecimiento de crédito, y no capta ahorro del público. Las operaciones de cambio se realizan a través de entidades del sistema financiero colombiano.</span><span class="en">Vera Pagos is not a bank or a credit institution and does not take public deposits. Currency exchange is carried out through institutions of the Colombian financial system.</span></p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="tarifas" class="mist">
+  <div class="wrap">
+    <div class="head center">
+      <p class="kicker"><span class="es">Tarifas</span><span class="en">Pricing</span></p>
+      <h2><span class="es">Una comisión. Siempre a la vista.</span><span class="en">One fee. Always in plain sight.</span></h2>
+      <p class="lede"><span class="es">Cobramos un porcentaje sobre cada pago que recibes. Lo ves en pesos antes de confirmar, junto con la tasa del día.</span><span class="en">We charge a percentage of each payment you receive. You see it in pesos before you confirm, along with the day's rate.</span></p>
+    </div>
+    <div class="price-grid">
+      <article class="price-card">
+        <h3 style="font-size:28px"><span class="es">Talento</span><span class="en">Talent</span></h3>
+        <p><span class="es">Para creadores, influencers, streamers y actores que cobran a título personal o con su propia LLC.</span><span class="en">For creators, influencers, streamers and actors paid personally or through their own LLC.</span></p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Apertura de cuenta sin costo</span><span class="en">No account opening fee</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Liquidación detallada por cada pago</span><span class="en">Detailed statement for every payout</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Certificado de ingresos anual</span><span class="en">Annual income certificate</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Soporte en español e inglés</span><span class="en">Support in Spanish and English</span></span></li>
+        </ul>
+        <a class="btn btn-primary" href="#abrir"><span class="es">Pedir mi tarifa</span><span class="en">Get my rate</span></a>
+      </article>
+      <article class="price-card">
+        <h3 style="font-size:28px"><span class="es">Estudios y agencias</span><span class="en">Studios &amp; agencies</span></h3>
+        <p><span class="es">Para equipos que reciben pagos de varias plataformas y pagan a muchas personas cada quincena.</span><span class="en">For teams that receive payments from several platforms and pay many people every pay period.</span></p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Todo lo de Talento</span><span class="en">Everything in Talent</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Dispersión a todo tu equipo</span><span class="en">Payouts to your whole team</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Reportes para contabilidad</span><span class="en">Accounting reports</span></span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.3l3 3L12 3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><span class="es">Tarifa según volumen mensual</span><span class="en">Rate based on monthly volume</span></span></li>
+        </ul>
+        <a class="btn btn-quiet" href="#abrir"><span class="es">Hablar con ventas</span><span class="en">Talk to sales</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="preguntas">
+  <div class="wrap">
+    <div class="head center">
+      <p class="kicker"><span class="es">Preguntas frecuentes</span><span class="en">FAQ</span></p>
+      <h2><span class="es">Lo que todos preguntan.</span><span class="en">What everyone asks.</span></h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary><span class="es">¿Qué es una pagadora?</span><span class="en">What is a pagadora?</span></summary>
+        <p><span class="es">Es una empresa colombiana que recibe en el exterior los pagos de tus clientes o plataformas, los convierte a pesos por canales formales y te los paga en tu cuenta en Colombia. Así no dependes de tarjetas prepagadas o billeteras del exterior, y tus ingresos quedan soportados.</span><span class="en">It is a Colombian company that receives your clients' or platforms' payments abroad, converts them to pesos through formal channels and pays you in your Colombian bank account. You stop depending on offshore prepaid cards or wallets, and your income is documented.</span></p>
+      </details>
+      <details>
+        <summary><span class="es">¿Es legal?</span><span class="en">Is it legal?</span></summary>
+        <p><span class="es">Sí. Prestar servicios desde Colombia a clientes en el exterior es una exportación de servicios. Lo importante es que tus ingresos estén documentados y declarados. Vera Pagos te entrega los soportes para hacerlo.</span><span class="en">Yes. Providing services from Colombia to clients abroad is an export of services. What matters is that your income is documented and declared. Vera Pagos gives you the paperwork to do that.</span></p>
+      </details>
+      <details>
+        <summary><span class="es">¿Qué necesito para abrir mi cuenta?</span><span class="en">What do I need to open an account?</span></summary>
+        <p><span class="es">Cédula de ciudadanía o de extranjería, RUT, certificación de tu cuenta bancaria en Colombia y una descripción de cómo generas tus ingresos. Si aún no tienes RUT, te explicamos cómo sacarlo.</span><span class="en">Your Colombian ID (cédula or cédula de extranjería), your RUT, a bank account certificate and a short description of how you earn. If you don't have a RUT yet, we'll walk you through getting one.</span></p>
+      </details>
+      <details>
+        <summary><span class="es">¿Necesito una empresa en Estados Unidos?</span><span class="en">Do I need a U.S. company?</span></summary>
+        <p><span class="es">No es obligatorio. Pero si tus plataformas o marcas te piden una LLC o un EIN, Green Room Global, nuestra empresa aliada, te la crea desde Colombia. Visita <a href="https://greenroomglobal.co" target="_blank" rel="noopener">greenroomglobal.co</a>.</span><span class="en">It isn't required. But if your platforms or brands ask for an LLC or an EIN, our sister company Green Room Global can set one up for you from Colombia. Visit <a href="https://greenroomglobal.co" target="_blank" rel="noopener">greenroomglobal.co</a>.</span></p>
+      </details>
+      <details>
+        <summary><span class="es">¿Cuánto tarda en llegar mi dinero?</span><span class="en">How long until I get my money?</span></summary>
+        <p><span class="es">Depende de cómo te paga tu plataforma o cliente. Una vez el dinero llega a Vera Pagos, te mostramos la liquidación y depositamos en tu cuenta en Colombia. Te avisamos en cada etapa para que siempre sepas dónde está tu pago.</span><span class="en">It depends on how your platform or client pays. Once the money reaches Vera Pagos, we show you the statement and deposit to your Colombian account. We notify you at every stage so you always know where your payment is.</span></p>
+      </details>
+      <details>
+        <summary><span class="es">¿Cómo sé cuánto voy a recibir?</span><span class="en">How do I know how much I'll receive?</span></summary>
+        <p><span class="es">Antes de cada pago ves el monto en dólares, la tasa aplicada, nuestra comisión y el valor final en pesos. Nada se descuenta después.</span><span class="en">Before every payout you see the dollar amount, the exchange rate, our fee and the final peso amount. Nothing is deducted afterwards.</span></p>
+      </details>
+      <details>
+        <summary><span class="es">¿Qué pasa con mis impuestos en Colombia?</span><span class="en">What about my taxes in Colombia?</span></summary>
+        <p><span class="es">Tus ingresos son tuyos y debes declararlos. Te entregamos un certificado anual y el detalle de cada pago para que tu contador prepare tu declaración de renta sin adivinar.</span><span class="en">Your income is yours to declare. We give you an annual certificate and the detail of every payment so your accountant can prepare your Colombian tax return without guesswork.</span></p>
+      </details>
+      <details>
+        <summary><span class="es">Tengo un estudio. ¿Pueden pagarle a mi equipo?</span><span class="en">I run a studio. Can you pay my team?</span></summary>
+        <p><span class="es">Sí. Recibimos los pagos de tus plataformas a nombre del estudio y dispersamos a cada persona de tu equipo con su propia liquidación. Escríbenos para una tarifa por volumen.</span><span class="en">Yes. We receive your platform payments in the studio's name and pay each person on your team with their own statement. Contact us for volume pricing.</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section id="abrir" class="mist">
+  <div class="wrap apply">
+    <div>
+      <p class="kicker"><span class="es">Abrir cuenta</span><span class="en">Open an account</span></p>
+      <h2 style="margin-top:12px"><span class="es">Empecemos.</span><span class="en">Let's get started.</span></h2>
+      <p class="lede" style="margin-top:14px"><span class="es">Cuéntanos de ti y de cómo te pagan hoy. Un asesor te contacta con tu tarifa y los pasos para abrir tu cuenta.</span><span class="en">Tell us about you and how you get paid today. An advisor will contact you with your rate and the steps to open your account.</span></p>
+      <div class="contact-list">
+        <div class="contact-line"><small><span class="es">Correo</span><span class="en">Email</span></small><span class="addr" id="mail">hola@verapagos.co</span><button class="copy" type="button" data-copy="mail"><span class="es">Copiar</span><span class="en">Copy</span></button></div>
+        <div class="contact-line"><small><span class="es">Oficina</span><span class="en">Office</span></small><span class="addr" style="user-select:text">Medellín, Colombia</span></div>
+      </div>
+    </div>
+
+    <form id="apply-form" novalidate>
+      <label><span class="es">Nombre completo</span><span class="en">Full name</span><input id="f-name" name="name" required autocomplete="name"></label>
+      <label><span class="es">Correo electrónico</span><span class="en">Email</span><input id="f-email" name="email" type="email" required autocomplete="email"></label>
+      <label><span>WhatsApp</span><input id="f-phone" name="phone" type="tel" placeholder="+57" autocomplete="tel"></label>
+      <label><span class="es">Soy</span><span class="en">I am</span>
+        <select id="f-type" name="type">
+          <option value="Creador/a de contenido" data-en="Content creator">Creador/a de contenido</option>
+          <option value="Influencer / UGC" data-en="Influencer / UGC">Influencer / UGC</option>
+          <option value="Streamer" data-en="Streamer">Streamer</option>
+          <option value="Actor / actriz / músico" data-en="Actor / musician">Actor / actriz / músico</option>
+          <option value="Estudio o agencia" data-en="Studio or agency">Estudio o agencia</option>
+        </select>
+      </label>
+      <label class="full"><span class="es">¿Cuánto recibes al mes desde EE.UU.? (USD)</span><span class="en">How much do you receive per month from the U.S.? (USD)</span>
+        <select id="f-volume" name="volume">
+          <option>&lt; $1,000</option>
+          <option>$1,000 – $5,000</option>
+          <option>$5,000 – $20,000</option>
+          <option>$20,000 – $100,000</option>
+          <option>&gt; $100,000</option>
+        </select>
+      </label>
+      <label class="full"><span class="es">¿Cómo te pagan hoy?</span><span class="en">How do you get paid today?</span><textarea id="f-notes" name="notes"></textarea></label>
+      <label class="full" style="display:flex;gap:10px;align-items:flex-start;font-weight:400"><input id="f-llc" type="checkbox" style="width:18px;height:18px;flex:none;margin-top:2px"><span><span class="es">Aún no tengo empresa en EE.UU. y me interesa crearla con Green Room Global.</span><span class="en">I don't have a U.S. company yet and I'm interested in forming one with Green Room Global.</span></span></label>
+      <button class="btn btn-primary" type="submit"><span class="es">Preparar solicitud</span><span class="en">Prepare request</span></button>
+      <p class="formnote full"><span class="es">Al enviar tus datos aceptas que Vera Pagos los trate para contactarte, según la Ley 1581 de 2012.</span><span class="en">By sending your details you agree that Vera Pagos may process them to contact you, under Colombian Law 1581 of 2012.</span></p>
+      <div class="done" id="done" hidden>
+        <b><span class="es">Tu solicitud está lista. Cópiala y envíala a hola@verapagos.co.</span><span class="en">Your request is ready. Copy it and send it to hola@verapagos.co.</span></b>
+        <pre id="summary"></pre>
+        <div class="row"><button class="btn btn-primary" type="button" id="copy-summary"><span class="es">Copiar solicitud</span><span class="en">Copy request</span></button><span class="formnote" id="copy-status" aria-live="polite"></span></div>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="row">
+      <a class="brand" href="#top" aria-label="Vera Pagos"><span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.2 3.4l4.8 8 4.8-8" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vera Pagos</a>
+      <nav aria-label="Pie">
+        <a href="#como"><span class="es">Cómo funciona</span><span class="en">How it works</span></a>
+        <a href="#tarifas"><span class="es">Tarifas</span><span class="en">Pricing</span></a>
+        <a href="#preguntas"><span class="es">Preguntas</span><span class="en">FAQ</span></a>
+        <a href="https://greenroomglobal.co" target="_blank" rel="noopener">Green Room Global</a>
+      </nav>
+    </div>
+    <div class="legal">
+      <p><span class="es">Vera Pagos · Medellín, Colombia. Vera Pagos no es un banco ni un establecimiento de crédito y no capta ahorro del público. Las tasas y comisiones se informan antes de cada operación. Los ejemplos de esta página son ilustrativos.</span><span class="en">Vera Pagos · Medellín, Colombia. Vera Pagos is not a bank or a credit institution and does not take public deposits. Rates and fees are disclosed before each transaction. Examples on this page are illustrative.</span></p>
+      <p><span class="es">Green Room Global es una empresa aliada que presta servicios empresariales y tributarios en Estados Unidos. Vera Pagos no presta asesoría tributaria ni legal.</span><span class="en">Green Room Global is a sister company that provides U.S. business and tax services. Vera Pagos does not provide tax or legal advice.</span></p>
+      <p>© 2026 Vera Pagos</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var body=document.body, es=document.getElementById('lang-es'), en=document.getElementById('lang-en');
+  function setLang(l){
+    body.classList.toggle('en', l==='en');
+    document.documentElement.lang = l;
+    es.setAttribute('aria-pressed', l==='es'); en.setAttribute('aria-pressed', l==='en');
+    document.querySelectorAll('option[data-en]').forEach(function(o){
+      if(!o.dataset.es) o.dataset.es=o.textContent;
+      o.textContent = l==='en' ? o.dataset.en : o.dataset.es;
+    });
+    try{localStorage.setItem('vp-lang', l)}catch(e){}
+  }
+  es.addEventListener('click',function(){setLang('es')});
+  en.addEventListener('click',function(){setLang('en')});
+  var saved=null; try{saved=localStorage.getItem('vp-lang')}catch(e){}
+  setLang(saved==='en'?'en':'es');
+
+  function copyText(text, onDone){
+    var ok=function(){onDone(true)}, fail=function(){onDone(false)};
+    try{ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok, fail); } else fail(); }catch(e){ fail(); }
+  }
+  function selectNode(n){ var r=document.createRange(); r.selectNodeContents(n); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var n=document.getElementById(b.dataset.copy);
+      copyText(n.textContent.trim(), function(ok){
+        if(!ok) selectNode(n);
+        var isEn=body.classList.contains('en');
+        b.textContent = ok ? (isEn?'Copied':'Copiado') : (isEn?'Selected':'Seleccionado');
+        setTimeout(function(){ b.innerHTML='<span class="es">Copiar</span><span class="en">Copy</span>'; }, 1800);
+      });
+    });
+  });
+
+  var form=document.getElementById('apply-form'), done=document.getElementById('done'), summary=document.getElementById('summary');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('f-name'), email=document.getElementById('f-email');
+    if(!name.value.trim()){ name.focus(); return; }
+    if(!email.value.trim() || !email.checkValidity()){ email.focus(); return; }
+    var isEn=body.classList.contains('en');
+    var t=document.getElementById('f-type');
+    var lines=[
+      (isEn?'Vera Pagos – account request':'Vera Pagos – solicitud de cuenta'),
+      (isEn?'Name: ':'Nombre: ')+name.value.trim(),
+      'Email: '+email.value.trim(),
+      'WhatsApp: '+(document.getElementById('f-phone').value.trim()||'–'),
+      (isEn?'Profile: ':'Perfil: ')+t.options[t.selectedIndex].textContent,
+      (isEn?'Monthly U.S. income: ':'Ingresos mensuales desde EE.UU.: ')+document.getElementById('f-volume').value,
+      (isEn?'Paid today via: ':'Cómo me pagan hoy: ')+(document.getElementById('f-notes').value.trim()||'–'),
+      (isEn?'Interested in a U.S. LLC (Green Room Global): ':'Interés en LLC en EE.UU. (Green Room Global): ')+(document.getElementById('f-llc').checked?(isEn?'Yes':'Sí'):'No')
+    ];
+    summary.textContent=lines.join('\n');
+    done.hidden=false;
+    done.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+  document.getElementById('copy-summary').addEventListener('click',function(){
+    var st=document.getElementById('copy-status'), isEn=body.classList.contains('en');
+    copyText(summary.textContent,function(ok){
+      if(!ok) selectNode(summary);
+      st.textContent= ok ? (isEn?'Copied. Paste it into an email to hola@verapagos.co.':'Copiado. Pégalo en un correo a hola@verapagos.co.') : (isEn?'Text selected. Copy it with Ctrl/Cmd + C.':'Texto seleccionado. Cópialo con Ctrl/Cmd + C.');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
