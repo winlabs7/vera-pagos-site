@@ -69,8 +69,7 @@ section{padding-block:clamp(72px,10vw,120px)}
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
 .top .wrap{display:flex;align-items:center;gap:22px;height:52px}
 .brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:600;font-size:18px;letter-spacing:-.02em;text-decoration:none!important;white-space:nowrap}
-.brand .mark{width:24px;height:24px;border-radius:7px;background:var(--ink);display:grid;place-items:center;flex:none}
-.brand .mark path{stroke:var(--bg)}
+.brand .mark{width:26px;height:26px;flex:none;display:block}
 .nav{display:flex;gap:24px;margin-left:auto;font-size:13px}
 .nav a{color:var(--ink);opacity:.8}
 .nav a:hover{opacity:1;text-decoration:none}
@@ -112,7 +111,7 @@ section{padding-block:clamp(72px,10vw,120px)}
 .bars{display:flex;align-items:flex-end;gap:5px;height:44px;margin:8px 0 4px}
 .bars i{flex:1;border-radius:4px;background:#D6E6FB}.bars i.hi{background:#0071E3}
 .notif{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;width:290px}
-.notif .app-ico{width:34px;height:34px;border-radius:9px;background:#1D1D1F;display:grid;place-items:center;flex:none}
+.notif .app-ico{width:34px;height:34px;flex:none;display:block}
 .notif .nt{display:flex;justify-content:space-between;gap:10px;font-size:13px}
 .notif .nt span{color:var(--faint);font-size:12px}
 .notif p{font-size:13px;line-height:1.35;margin-top:1px}
@@ -310,7 +309,7 @@ form .btn{justify-self:start}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Vera Pagos">
-      <span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.2 3.4l4.8 8 4.8-8" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <img class="mark" src="favicon.svg?v=2" width="26" height="26" alt="">
       Vera Pagos
     </a>
     <nav class="nav" aria-label="Principal">
@@ -369,7 +368,7 @@ form .btn{justify-self:start}
       <!-- phone -->
       <div class="phone-wrap">
         <div class="notif notif-m" aria-hidden="true">
-          <span class="app-ico"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M2.2 3.4l4.8 8 4.8-8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <img class="app-ico" src="favicon.svg?v=2" width="34" height="34" alt="">
           <div><div class="nt"><b>Vera Pagos</b><span><span class="es">ahora</span><span class="en">now</span></span></div><p><span class="es">Depositamos $12.247.334 en tu cuenta ••4821.</span><span class="en">We deposited $12,247,334 COP to your account ••4821.</span></p></div>
         </div>
         <div class="phone" role="img" aria-label="App de Vera Pagos mostrando un depósito de 12.247.334 pesos">
@@ -419,7 +418,7 @@ form .btn{justify-self:start}
       <!-- right floating cards -->
       <div class="side side-r" aria-hidden="true">
         <div class="notif f3">
-          <span class="app-ico"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M2.2 3.4l4.8 8 4.8-8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <img class="app-ico" src="favicon.svg?v=2" width="34" height="34" alt="">
           <div><div class="nt"><b>Vera Pagos</b><span><span class="es">ahora</span><span class="en">now</span></span></div><p><span class="es">Depositamos $12.247.334 en tu cuenta ••4821.</span><span class="en">We deposited $12,247,334 COP to your account ••4821.</span></p></div>
         </div>
         <div class="float f4">
@@ -740,7 +739,7 @@ form .btn{justify-self:start}
 <footer class="footer">
   <div class="wrap">
     <div class="row">
-      <a class="brand" href="#top" aria-label="Vera Pagos"><span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.2 3.4l4.8 8 4.8-8" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vera Pagos</a>
+      <a class="brand" href="#top" aria-label="Vera Pagos"><img class="mark" src="favicon.svg?v=2" width="26" height="26" alt="">Vera Pagos</a>
       <nav aria-label="Pie">
         <a href="#como"><span class="es">Cómo funciona</span><span class="en">How it works</span></a>
         <a href="#tarifas"><span class="es">Tarifas</span><span class="en">Pricing</span></a>
